@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Project: Travel webpage</title>
+    <style>
+      #title {font-family: 'Times New Roman', Times, serif; font-size: 100px;}
+      body {font-family: monospace;}
+      table {
+        border: 1px solid rgb(77, 77, 77);
+      }
+      table th, table td {
+        border: 1px solid rgb(174, 174, 174);
+        padding: 4px;
+      }
+      tbody tr:nth-child(even){
+        background-color: #f2f2f2;;
+      }
+      .status{
+
+      }
+      .status.rejected{
+        color: rgb(248, 47, 47);
+        border-radius: 4px;
+        padding: 2px 16px;
+      }     
+      .status.interview{
+        color: white;
+        background-color: rgb(13, 179, 123);
+        border-radius: 4px;
+        padding: 2px 16px;
+      }
+      .status.applied{
+        color: white;
+        background-color: rgb(93, 181, 6);
+        border-radius: 4px;
+        padding: 2px 16px;
+      }
+      .status.offered{
+        color: white;
+        background-color: gold;
+        border-radius: 4px;
+        padding: 2px 16px;
+      }
+      a {
+        color: rgb(152, 196, 182);
+      }
+      body{
+        margin: 80px;
+      }
+    </style>
+  </head>
+<!--head-->
+<body>
+    <p>Welcome to the</p>
+    <h2>HISTORY</h2>
+    <br><br><br>
+
+
+    <div id="stats1"></div>
+    <p><strong>Product Designer</strong>, Since OCT 2025</p>
+    <table id="table1">
+      <thead>
+        <tr>
+        <th>Company</th>
+        <th>Job</th>
+        <th>Date</th>
+        <th>Result</th>
+        <th>Memo</th>
+        <th>Link</th>
+      </tr>
+      </thead>
+      <tbody>
+<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+        <tr>
+        <td>Natwest</td>
+        <td>Product Designer</td>
+        <td>250000</td>
+        <td>
+          <span class="status rejected">rejected</span>
+        </td>
+        <td>First reject mail✨</td>
+        <td><a href="">링크</a></td>
+        </tr>
+<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+        <tr>
+        <td>Revoult</td>
+        <td>Product Designer</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td><a href="">링크</a></td>
+        </tr>
+<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+        <tr>
+        <td>Justeat</td>
+        <td>Product Designer</td>
+        <td>-</td>
+        <td>-</td>
+        <td>Closed in 1 day 😭</td>  
+        <td><a href="">링크</a></td>
+      </tr>
+
+
+
+      </tbody>
+    </table>
+
+
+
+
+
+
+<br><br><br>
+<!-- 여긴카페 -->
+    <div id="stats2"></div>
+    <p><strong>Cafe</strong>, Since NOV 2025</p>
+    <table id="table2">
+      <thead>
+        <tr>
+        <th>Company</th>
+        <th>Job</th>
+        <th>Date</th>
+        <th>Result</th>
+        <th>Memo</th>
+        <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+        <tr>
+        <td>Watch House</td>
+        <td>Cafe Manager</td>
+        <td>251205</td>
+        <td>
+          <span class="status applied">applied</span>
+        </td>
+        <td>-</td>
+        <td><a href="">링크</a></td>
+        </tr>
+<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+        <tr>
+        <td>Justeat</td>
+        <td>Product Designer</td>
+        <td>-</td>
+        <td>
+          <span class="status offered">offered</span>
+        </td>
+        <td>Closed in 1 day 😭</td>
+        <td><a href="">링크</a></td>
+        </tr>
+<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+        <tr>
+        <td>Justeat</td>
+        <td>Product Designer</td>
+        <td>-</td>
+        <td>
+            <span class="status interview">interview</span>
+        </td>
+        <td>Closed in 1 day 😭</td>
+        <td><a href="">링크</a></td>
+        </tr>
+
+
+      </tbody>
+    </table>
+
+
+
+
+
+    <br><br><br>
+    <!-- 다시 메인(index)으로 돌아가는 링크 -->
+    <p><a href="index.html">← Back to main page</a></p>
+
+
+    <script>
+      
+      window.addEventListener('DOMContentLoaded', function () {
+        updateStats('table1', 'stats1')
+        updateStats('table2', 'stats2')
+        });
+        //적용 함수??? 뭔데 이게... 아직 JS는 그림그리기정도 하는 수준인디..
+        function updateStats(tableId, statsId){
+          const table = document.getElementById(tableId);
+
+          const rejectedCount = table.querySelectorAll('.status.rejected').length;
+          const interviewCount = table.querySelectorAll('.status.interview').length;
+          const appliedCount   = table.querySelectorAll('.status.applied').length;
+          const offeredCount   = table.querySelectorAll('.status.offered').length;
+          const totalCount     = table.querySelectorAll('tbody tr').length;
+
+          const statsDiv = document.getElementById(statsId);
+          statsDiv.innerHTML=`
+          <p>
+            Total: ${totalCount} / Applied: ${appliedCount} / Interview: ${interviewCount} /
+            Rejected: ${rejectedCount} / Offered: ${offeredCount}
+          </p>
+          `;
+        }
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+  </body>
+
+
+
+</html>
