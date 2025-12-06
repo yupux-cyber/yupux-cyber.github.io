@@ -62,38 +62,49 @@
         <th>Company</th>
         <th>Job</th>
         <th>Date</th>
+        <th>Days</th>
         <th>Result</th>
         <th>Memo</th>
         <th>Link</th>
       </tr>
       </thead>
       <tbody>
-<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
         <tr>
         <td>Natwest</td>
         <td>Product Designer</td>
-        <td>250000</td>
+        <td data-applied="2025-10-01" data-ended="2025-11-16">251001</td>
+        <td class="days-since"></td>
         <td>
           <span class="status rejected">rejected</span>
         </td>
-        <td>First reject mail✨</td>
+        <td>First reject mail✨ 떼잉</td>
         <td><a href="">링크</a></td>
         </tr>
-<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
+        <tr>
+        <td>Figma</td>
+        <td>Product Designer</td>
+        <td data-applied="2025-12-01">251001</td>
+        <td class="days-since">-</td>
+        <td>왜? 답이 안오지?ㅎ</td>
+        <td><a href="https://job-boards.greenhouse.io/figma/jobs/5657064004?gh_jid=5657064004">링크</a></td>
+        </tr>
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
         <tr>
         <td>Revoult</td>
         <td>Product Designer</td>
-        <td>-</td>
-        <td>-</td>
+        <td data-applied="2025-12-01">251205</td>
+        <td class="days-since">-</td>
         <td>-</td>
         <td><a href="">링크</a></td>
         </tr>
-<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
         <tr>
         <td>Justeat</td>
         <td>Product Designer</td>
-        <td>-</td>
-        <td>-</td>
+        <td data-applied="2025-12-01">251205</td>
+        <td class="days-since">-</td>
         <td>Closed in 1 day 😭</td>  
         <td><a href="">링크</a></td>
       </tr>
@@ -118,46 +129,61 @@
         <th>Company</th>
         <th>Job</th>
         <th>Date</th>
+        <th>Days</th>
         <th>Result</th>
         <th>Memo</th>
         <th>Link</th>
         </tr>
       </thead>
       <tbody>
-<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
         <tr>
         <td>Watch House</td>
-        <td>Cafe Manager</td>
-        <td>251205</td>
+        <td>Assistant coffee shop Manager</td>
+        <td data-applied="2025-12-05">251205</td>
+        <td class="days-since">-</td>
         <td>
           <span class="status applied">applied</span>
         </td>
-        <td>-</td>
+        <td>1지망</td>
         <td><a href="">링크</a></td>
         </tr>
-<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
         <tr>
-        <td>Justeat</td>
-        <td>Product Designer</td>
-        <td>-</td>
+        <td>Bonbon Pottery Cafe, royal wharf</td>
+        <td>assistant</td>
+        <td data-applied="2025-12-05">251205</td>
+        <td class="days-since">-</td>
         <td>
-          <span class="status offered">offered</span>
+          <span class="status applied">applied</span>
         </td>
-        <td>Closed in 1 day 😭</td>
+        <td>도자기도 만들어볼수도!</td>
         <td><a href="">링크</a></td>
         </tr>
-<!--회사, 직책, 날짜, 결과, 메모, 링크-->
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
         <tr>
-        <td>Justeat</td>
-        <td>Product Designer</td>
-        <td>-</td>
+        <td>Cafe Brera</td>
+        <td>Pizza Chef</td>
+        <td data-applied="2025-12-05">251205</td>
+        <td class="days-since">-</td>
         <td>
-            <span class="status interview">interview</span>
+          <span class="status applied">applied</span>
         </td>
-        <td>Closed in 1 day 😭</td>
+        <td>피자만 만드는걸까?</td>
         <td><a href="">링크</a></td>
         </tr>
-
+<!--회사, 직책, 날짜, 경과, 결과, 메모, 링크-->
+        <tr>
+        <td>Barbican Centre</td>
+        <td>Cafe Manager</td>
+        <td data-applied="2025-12-05">251205</td>
+        <td class="days-since">-</td>
+        <td>
+          <span class="status applied">applied</span>
+        </td>
+        <td>바비칸!</td>
+        <td><a href="">링크</a></td>
+        </tr>
 
       </tbody>
     </table>
@@ -176,6 +202,7 @@
       window.addEventListener('DOMContentLoaded', function () {
         updateStats('table1', 'stats1')
         updateStats('table2', 'stats2')
+        fillDaysSince();
         });
         //적용 함수??? 뭔데 이게... 아직 JS는 그림그리기정도 하는 수준인디..
         function updateStats(tableId, statsId){
@@ -195,11 +222,29 @@
           </p>
           `;
         }
+      // 날짜 → D+몇일 채우기
+        function fillDaysSince() {
+          const today = new Date();
+          const dateTds = document.querySelectorAll('td[data-applied]');
 
+          dateTds.forEach(td => {
+            const dateStr = td.dataset.applied;     // "2025-12-05"
+            const endedStr = td.dataset.ended;   // "2025-11-16" (optional)
 
+            const appliedDate = new Date(dateStr);  // 이 형식은 JS가 바로 이해함
+            const endedDate = endedStr ? new Date(endedStr) : today; // 종료일이 있으면 그걸로 계산, 없으면 오늘 날짜로
 
+            const diffMs = endedDate - appliedDate;
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
+            const row = td.parentElement;
+            const daysCell = row.querySelector('.days-since');
 
+            if (daysCell) {
+              daysCell.textContent = diffDays === 0 ? 'Today' : `D+${diffDays}`;
+            }
+          });
+        }
     </script>
 
 
